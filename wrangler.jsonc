@@ -1,0 +1,37 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "nanda-portfolio",
+  "compatibility_date": "2025-04-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./workers/app.ts",
+  // Disable the workers.dev URL and Preview URLs so all traffic must go
+  // through nandakumaronline.com (which has the zone-level rate limit
+  // and WAF rules applied).
+  "workers_dev": false,
+  "preview_urls": false,
+  // Public (client-readable) variables. Sensitive values must be set as
+  // secrets via `wrangler secret put`, NOT here.
+  "vars": {
+    // The Turnstile widget renders this site key client-side. Replace with
+    // the real site key you create at:
+    //   https://dash.cloudflare.com/?to=/:account/turnstile
+    "TURNSTILE_SITE_KEY": "0x4AAAAAADPC4AH64MKI5t2U",
+    // Which Gemini model to use for AI tailoring.
+    "GEMINI_MODEL": "gemini-2.5-flash"
+  },
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./build/client"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "myportfoliodb",
+      "database_id": "d73f6e91-ea2d-4af0-81b8-66999b86a842",
+      "migrations_dir": "./migrations"
+    }
+  ]
+}

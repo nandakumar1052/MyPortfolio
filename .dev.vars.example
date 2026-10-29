@@ -1,0 +1,27 @@
+# Copy this file to .dev.vars for local development.
+# .dev.vars is NEVER committed to git.
+
+# Used to sign session cookies. Generate one with:
+#   node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+SESSION_SECRET="replace-me-with-a-long-random-string"
+
+# Admin password. The hash is derived with PBKDF2 at runtime.
+# Pick something long; you'll type it into /admin/login.
+ADMIN_PASSWORD="change-this-to-something-strong"
+
+# Tells the session cookie to allow http:// (no Secure flag) locally.
+ENVIRONMENT="development"
+
+# Cloudflare Turnstile — contact-form captcha. Optional.
+# Leave blank to skip the captcha. The site key is rendered to the client;
+# the secret key stays server-only. The values below are Cloudflare's
+# "always-passes" test keys, safe for dev only.
+# Create real keys at https://dash.cloudflare.com/?to=/:account/turnstile
+TURNSTILE_SITE_KEY="1x00000000000000000000AA"
+TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA"
+
+# Google Gemini API key (free tier). Used by /admin/resume/tailored/new
+# to AI-tailor resumes against job descriptions.
+# Get one at https://aistudio.google.com/app/apikey
+GEMINI_API_KEY=""
+GEMINI_MODEL="gemini-2.5-flash"
