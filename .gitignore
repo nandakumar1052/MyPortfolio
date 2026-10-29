@@ -1,0 +1,30 @@
+node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+# Cloudflare
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.deploy-secrets.local
+
+# Local D1 exports (may contain personal contact form messages)
+backups/
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env
+.env
+.env.local
+.env.*.local
