@@ -597,6 +597,61 @@ export async function upsertCertification(
   }
 }
 
+export async function upsertEducation(
+  ctx: AppLoadContext,
+  data: {
+    id?: number;
+    institution: string;
+    degree: string;
+    location: string | null;
+    start_date: string | null;
+    end_date: string | null;
+    details: string | null;
+    sort_order: number;
+  },
+) {
+  if (data.id) {
+    await db(ctx)
+      .prepare(
+        `UPDATE education SET
+          institution=?, degree=?, location=?, start_date=?, end_date=?, details=?, sort_order=?
+         WHERE id=?`,
+      )
+      .bind(
+        data.institution,
+        data.degree,
+        data.location,
+        data.start_date,
+        data.end_date,
+        data.details,
+        data.sort_order,
+        data.id,
+      )
+      .run();
+  } else {
+    await db(ctx)
+      .prepare(
+        `INSERT INTO education
+          (institution, degree, location, start_date, end_date, details, sort_order)
+         VALUES (?,?,?,?,?,?,?)`,
+      )
+      .bind(
+        data.institution,
+        data.degree,
+        data.location,
+        data.start_date,
+        data.end_date,
+        data.details,
+        data.sort_order,
+      )
+      .run();
+  }
+}
+
+export async function deleteEducation(ctx: AppLoadContext, id: number) {
+  await db(ctx).prepare("DELETE FROM education WHERE id = ?").bind(id).run();
+}
+
 export async function deleteCertification(ctx: AppLoadContext, id: number) {
   await db(ctx)
     .prepare("DELETE FROM certifications WHERE id = ?")

@@ -26,6 +26,7 @@ export default [
     route("admin/experience", "routes/admin.experience.tsx"),
     route("admin/projects", "routes/admin.projects.tsx"),
     route("admin/skills", "routes/admin.skills.tsx"),
+    route("admin/education", "routes/admin.education.tsx"),
     route("admin/certifications", "routes/admin.certifications.tsx"),
     route("admin/resume", "routes/admin.resume.tsx"),
     route("admin/resume/tailored", "routes/admin.resume.tailored.tsx"),
